@@ -12,11 +12,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/blog")
-public class BlogController {
+public class PostController {
 
     private final PostService postService;
 
-    public BlogController(PostService postService) {
+    public PostController(PostService postService) {
         this.postService = postService;
     }
 

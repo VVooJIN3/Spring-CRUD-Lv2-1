@@ -1,9 +1,9 @@
 package com.crud.blog.controller;
 
-import com.crud.blog.dto.BlogRequestDto;
-import com.crud.blog.dto.BlogResponseDto;
-import com.crud.blog.entity.Blog;
-import com.crud.blog.service.BlogService;
+import com.crud.blog.dto.PostRequestDto;
+import com.crud.blog.dto.PostResponseDto;
+import com.crud.blog.entity.Post;
+import com.crud.blog.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -14,46 +14,46 @@ import java.util.Map;
 @RequestMapping("/blog")
 public class BlogController {
 
-    private final BlogService blogService;
+    private final PostService postService;
 
-    public BlogController(BlogService blogService) {
-        this.blogService = blogService;
+    public BlogController(PostService postService) {
+        this.postService = postService;
     }
 
-    private final Map<Integer, Blog> blogMap = new HashMap<>();
+    private final Map<Integer, Post> blogMap = new HashMap<>();
 
     // 게시글 작성
     @PostMapping("/post")
-    public BlogResponseDto createBlogPost(@RequestBody BlogRequestDto requestDto) {
+    public PostResponseDto createBlogPost(@RequestBody PostRequestDto requestDto) {
 
-        return blogService.createBlogPost(requestDto);
+        return postService.createBlogPost(requestDto);
     }
 
     // 전체 게시글 목록 조회
     @GetMapping("/posts")
-    public List<BlogResponseDto> getBlogPosts() {
+    public List<PostResponseDto> getBlogPosts() {
 
-        return blogService.getBlogPosts();
+        return postService.getBlogPosts();
     }
 
     // 선택한 게시글 조회
     @GetMapping("/post/{id}")
-    public BlogResponseDto getBlogPost(@PathVariable Integer id) {
+    public PostResponseDto getBlogPost(@PathVariable Integer id) {
 
-        return blogService.getBlogPost(id);
+        return postService.getBlogPost(id);
     }
 
     // 선택한 게시글 수정
     @PutMapping("/post/{id}")
-    public BlogResponseDto updateBlogPost(@PathVariable Integer id, @RequestBody BlogRequestDto requestDto) {
+    public PostResponseDto updateBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto) {
 
-        return blogService.updateBlogPost(id, requestDto);
+        return postService.updateBlogPost(id, requestDto);
     }
 
     // 선택한 게시글 삭제
     @DeleteMapping("/post/{id}")
-    public BlogResponseDto deleteBlogPost(@PathVariable Integer id, @RequestBody BlogRequestDto requestDto) {
+    public PostResponseDto deleteBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto) {
 
-        return blogService.deleteBlogPost(id, requestDto);
+        return postService.deleteBlogPost(id, requestDto);
     }
 }

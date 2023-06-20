@@ -1,12 +1,12 @@
 package com.crud.blog.dto;
 
-import com.crud.blog.entity.Blog;
+import com.crud.blog.entity.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class BlogResponseDto {
+public class PostResponseDto {
         
     private LocalDateTime createdAt; // 생성시간
     private LocalDateTime modifiedAt; // 수정시간
@@ -17,17 +17,17 @@ public class BlogResponseDto {
 
     private Boolean success; // 저장 완료인지 아닌지
 
-    public BlogResponseDto(Boolean success) {
+    public PostResponseDto(Boolean success) {
         this.success = success;
     }
 
-    public BlogResponseDto(Blog blog) {
-        this.createdAt = blog.getCreatedAt();
-        this.modifiedAt = blog.getModifiedAt();
+    public PostResponseDto(Post post) {
+        this.createdAt = post.getCreatedAt();
+        this.modifiedAt = post.getModifiedAt();
 
-        this.id = blog.getId();
-        this.title = blog.getTitle();
-        this.content = blog.getContent();
-        this.author = blog.getAuthor();
+        this.id = post.getId();
+        this.title = post.getTitle();
+        this.content = post.getContent();
+        this.author = post.getAuthor();
     }
 }

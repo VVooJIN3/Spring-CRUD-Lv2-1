@@ -41,4 +41,12 @@ public class Blog extends Timestamped {
         this.author = requestDto.getAuthor();
     }
 
+    // Service
+
+    public void checkPassword(String password) {
+
+        if (!this.password.equals(password)) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+    }
 }

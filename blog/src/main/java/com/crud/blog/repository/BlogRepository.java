@@ -9,7 +9,5 @@ import java.util.List;
 public interface BlogRepository extends JpaRepository<Blog, Integer> {
 
     List<Blog> findAllByOrderByCreatedAtDesc();
-
-    Blog findByIdAndPassword(Integer id, String password);
 }
 

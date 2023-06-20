@@ -2,7 +2,6 @@ package com.crud.blog.controller;
 
 import com.crud.blog.dto.BlogRequestDto;
 import com.crud.blog.dto.BlogResponseDto;
-import com.crud.blog.dto.SuccessResponseDto;
 import com.crud.blog.entity.Blog;
 import com.crud.blog.service.BlogService;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +52,7 @@ public class BlogController {
 
     // 선택한 게시글 삭제
     @DeleteMapping("/post/{id}")
-    public SuccessResponseDto deleteBlogPost(@PathVariable Integer id, @RequestBody BlogRequestDto requestDto) {
+    public BlogResponseDto deleteBlogPost(@PathVariable Integer id, @RequestBody BlogRequestDto requestDto) {
 
         return blogService.deleteBlogPost(id, requestDto);
     }

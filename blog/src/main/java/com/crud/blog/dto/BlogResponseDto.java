@@ -15,6 +15,11 @@ public class BlogResponseDto {
     private String content; // 내용
     private String author; // 작성자
 
+    private Boolean success; // 저장 완료인지 아닌지
+
+    public BlogResponseDto(Boolean success) {
+        this.success = success;
+    }
 
     public BlogResponseDto(Blog blog) {
         this.createdAt = blog.getCreatedAt();

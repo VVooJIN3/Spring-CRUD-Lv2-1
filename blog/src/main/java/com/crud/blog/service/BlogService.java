@@ -2,7 +2,6 @@ package com.crud.blog.service;
 
 import com.crud.blog.dto.BlogRequestDto;
 import com.crud.blog.dto.BlogResponseDto;
-import com.crud.blog.dto.SuccessResponseDto;
 import com.crud.blog.entity.Blog;
 import com.crud.blog.repository.BlogRepository;
 import jakarta.transaction.Transactional;
@@ -48,39 +47,35 @@ public class BlogService {
         return new BlogResponseDto(blog);
     }
 
+
     @Transactional
     public BlogResponseDto updateBlogPost(Integer id, BlogRequestDto requestDto) {
 
         // 1. 해당 게시글이 DB에 존재하는지 확인
-        Blog blog = blogRepository.findByIdAndPassword(id, requestDto.getPassword());
-        if(blog != null) {
+        Blog blog = findBlogPost(id);
 
-            // 2. 존재하면 blog 수정
-            blog.update(requestDto); // DB 저장
+        // 2. 비밀번호 체크
+        blog.checkPassword(requestDto.getPassword());
 
-            BlogResponseDto blogResponseDto = new BlogResponseDto(blog);
+        // 3. 존재하면 blog 수정
+        blog.update(requestDto); // DB 저장
+        BlogResponseDto blogResponseDto = new BlogResponseDto(blog);
 
-            return blogResponseDto;
-
-        } else {
-            throw new IllegalArgumentException("비밀번호가 올바르지 않습니다.");
-        }
+        return blogResponseDto;
     }
 
-    public SuccessResponseDto deleteBlogPost(Integer id, BlogRequestDto requestDto) {
+    public BlogResponseDto deleteBlogPost(Integer id, BlogRequestDto requestDto) {
 
         // 1. 해당 게시글이 DB에 존재하는지 확인
-        Blog blog = blogRepository.findByIdAndPassword(id, requestDto.getPassword());
-        if(blog != null) {
+        Blog blog = findBlogPost(id);
 
-            // 2. 존재하면 blog 삭제
-            blogRepository.delete(blog);
+        // 2. 비밀번호 체크
+        blog.checkPassword(requestDto.getPassword());
 
-            return new SuccessResponseDto(true);
+        // 3. 존재하면 blog 삭제
+        blogRepository.delete(blog);
 
-        } else {
-            return new SuccessResponseDto(false);
-        }
+        return new BlogResponseDto(true);
     }
 
     private Blog findBlogPost(Integer id) {

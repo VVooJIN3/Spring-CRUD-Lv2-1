@@ -20,31 +20,15 @@ public class Post extends Timestamped {
     private String title; // 제목
     @Column(name = "content", nullable = false)
     private String content; // 내용
-    @Column(name = "author", nullable = false)
-    private String author; // 작성자
-    @Column(name = "password", nullable = false, length = 12)
-    private String password; // 비밀번호
 
 
     public Post(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.author = requestDto.getAuthor();
-        this.password = requestDto.getPassword();
     }
 
     public void update(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.author = requestDto.getAuthor();
-    }
-
-    // Service
-
-    public void checkPassword(String password) {
-
-        if (!this.password.equals(password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
     }
 }

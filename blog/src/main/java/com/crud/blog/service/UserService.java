@@ -35,10 +35,8 @@ public class UserService {
             throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
         }
 
-        // RequestDto -> Entity
-        User user = new User(username, password);
-
-        // DB 저장
+        // 사용자 DB에 등록
+        User user = new User(username, password);        
         User saveUser = userRepository.save(user);
 
         // Entity -> ResponseDto로 변환 후 반환

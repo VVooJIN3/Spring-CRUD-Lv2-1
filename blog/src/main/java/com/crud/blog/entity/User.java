@@ -2,6 +2,7 @@ package com.crud.blog.entity;
 
 import com.crud.blog.dto.UserRequestDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,11 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //@Pattern(regexp = "^(?=.*[a-z])(?=.*[0-9]){4,10}$")
+
     @Column(nullable = false, unique = true)
     private String username;
 
-    //@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9]){8,15}$")
     @Column(nullable = false)
     private String password;
 

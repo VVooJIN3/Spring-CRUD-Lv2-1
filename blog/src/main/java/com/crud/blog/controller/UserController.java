@@ -4,6 +4,7 @@ package com.crud.blog.controller;
 import com.crud.blog.dto.UserRequestDto;
 import com.crud.blog.dto.UserResponseDto;
 import com.crud.blog.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,12 @@ public class UserController {
     @PostMapping("/auth/signup")
     public UserResponseDto signup(@RequestBody UserRequestDto requestDto) {
 
-        return userService.signUp(requestDto);
+        return userService.signup(requestDto);
+    }
+
+    @PostMapping("/auth/login")
+    public UserResponseDto login(@RequestBody UserRequestDto requestDto, HttpServletResponse res) {
+
+        return userService.login(requestDto, res);
     }
 }

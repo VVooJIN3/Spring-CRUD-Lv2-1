@@ -55,7 +55,7 @@ public class PostService {
         Post post = findBlogPost(id);
 
         // 2. 비밀번호 체크
-        post.checkPassword(requestDto.getPassword());
+        // post.checkPassword(requestDto.getPassword());
 
         // 3. 존재하면 post 수정
         post.update(requestDto); // DB 저장
@@ -70,7 +70,7 @@ public class PostService {
         Post post = findBlogPost(id);
 
         // 2. 비밀번호 체크
-        post.checkPassword(requestDto.getPassword());
+        // post.checkPassword(requestDto.getPassword());
 
         // 3. 존재하면 post 삭제
         postRepository.delete(post);

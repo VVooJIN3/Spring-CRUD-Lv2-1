@@ -20,7 +20,8 @@ public class Post extends Timestamped {
     private String title; // 제목
     @Column(name = "content", nullable = false)
     private String content; // 내용
-
+    @Column(name = "username", nullable = false)
+    private String username; // 작성한 유저
 
     public Post(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();

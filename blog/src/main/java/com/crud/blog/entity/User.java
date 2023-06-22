@@ -1,5 +1,6 @@
 package com.crud.blog.entity;
 
+import com.crud.blog.dto.UserRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,16 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //@Pattern(regexp = "^(?=.*[a-z])(?=.*[0-9]){4,10}$")
     @Column(nullable = false, unique = true)
     private String username;
 
+    //@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9]){8,15}$")
     @Column(nullable = false)
     private String password;
 
 
-    public User(Integer id, String username, String password) {
-
-        this.id = id;
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }

@@ -13,7 +13,7 @@ public class PostResponseDto {
     private Integer id; // id
     private String title; // 제목
     private String content; // 내용
-    private String author; // 작성자
+    private String username; // 작성 유저
 
     private Boolean success; // 저장 완료인지 아닌지
 
@@ -22,12 +22,13 @@ public class PostResponseDto {
     }
 
     public PostResponseDto(Post post) {
+
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
 
         this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.author = post.getAuthor();
+        this.username = post.getUsername();
     }
 }

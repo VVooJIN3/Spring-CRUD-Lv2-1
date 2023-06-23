@@ -28,7 +28,9 @@ public class PostController {
     @PostMapping("/write")
     public PostResponseDto createBlogPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return postService.createBlogPost(requestDto, userDetails.getUser());
+        PostResponseDto responseDto = postService.createBlogPost(requestDto, userDetails.getUser());
+
+        return responseDto;
     }
 
     // 전체 게시글 목록 조회

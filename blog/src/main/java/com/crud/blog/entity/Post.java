@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity // JPA가 관리할 수 있는 Entity 클래스 지정
 @Getter
 @Setter
 @Table(name = "post") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Post extends Timestamped {
 
     @Id
@@ -23,12 +25,9 @@ public class Post extends Timestamped {
     @Column(name = "username", nullable = false)
     private String username; // 작성한 유저
 
-    public Post(PostRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.content = requestDto.getContent();
-    }
 
     public Post(PostRequestDto requestDto, User user) {
+
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
 

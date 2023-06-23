@@ -8,6 +8,7 @@ import com.crud.blog.repository.PostRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,8 +29,15 @@ public class PostService {
 
     // 전체 게시글 조회
     public List<PostResponseDto> getBlogPosts() {
-        // DB 조회
-        return postRepository.findAllByOrderByCreatedAtDesc().stream().map(PostResponseDto::new).toList();
+
+        List<Post> postList = postRepository.findAll();
+        List<PostResponseDto> responseDtoList = new ArrayList<>();
+
+        for(Post post : postList) {
+            responseDtoList.add(new PostResponseDto(post));
+        }
+
+        return responseDtoList;
     }
 
     // 선택한 게시글 조회

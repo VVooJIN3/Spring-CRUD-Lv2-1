@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -67,7 +67,7 @@ public class WebSecurityConfig {
                 authorizeHttpRequests
                         // resources 접근 허용 설정
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        // "/blog/auth/"로 시작하는 요청 모두 접근 허가
+                        // "/blog/"로 시작하는 요청 모두 접근 허가
                         .requestMatchers("/blog/**").permitAll()
                         // 그 외 모든 요청 인증 처리
                         .anyRequest().authenticated()

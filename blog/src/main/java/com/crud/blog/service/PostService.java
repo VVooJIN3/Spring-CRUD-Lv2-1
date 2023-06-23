@@ -30,7 +30,7 @@ public class PostService {
     // 전체 게시글 조회
     public List<PostResponseDto> getBlogPosts() {
 
-        List<Post> postList = postRepository.findAll();
+        List<Post> postList = postRepository.findAllByOrderByCreatedAtDesc();
         List<PostResponseDto> responseDtoList = new ArrayList<>();
 
         for(Post post : postList) {

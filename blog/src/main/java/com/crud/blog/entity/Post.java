@@ -12,18 +12,17 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 @Table(name = "post") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class Post extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; // id
+    private Integer id;
     @Column(name = "title", nullable = false)
-    private String title; // 제목
+    private String title;
     @Column(name = "content", nullable = false)
-    private String content; // 내용
+    private String content;
     @Column(name = "username", nullable = false)
-    private String username; // 작성한 유저
+    private String username;
 
 
     public Post(PostRequestDto requestDto, User user) {

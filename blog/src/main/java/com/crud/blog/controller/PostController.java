@@ -37,7 +37,9 @@ public class PostController {
     @GetMapping("/posts")
     public List<PostResponseDto> getBlogPosts() {
 
-        return postService.getBlogPosts();
+        List<PostResponseDto> responseDtoList = postService.getBlogPosts();
+
+        return responseDtoList;
     }
 
     // 선택한 게시글 조회

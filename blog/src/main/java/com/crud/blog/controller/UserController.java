@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j // 로깅에 사용
-// @RestController
-@Controller
+@RestController
 @RequestMapping("/blog")
 public class UserController {
 
@@ -28,8 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/auth/signup")
-    @ResponseBody
-    public UserResponseDto signup(@RequestBody @Valid UserRequestDto requestDto, BindingResult bindingResult) {
+    public UserResponseDto signup(@RequestBody @Valid UserRequestDto requestDto, HttpServletResponse res, BindingResult bindingResult) {
 
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -44,12 +42,10 @@ public class UserController {
             return null;
         }
 
-
-        return userService.signup(requestDto);
+        return userService.signup(requestDto, res);
     }
 
     @PostMapping("/auth/login")
-    @ResponseBody
     public UserResponseDto login(@RequestBody UserRequestDto requestDto, HttpServletResponse res) {
 
         return userService.login(requestDto, res);

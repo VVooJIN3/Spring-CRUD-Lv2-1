@@ -24,7 +24,7 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
-    public UserResponseDto signup(UserRequestDto requestDto) {
+    public UserResponseDto signup(UserRequestDto requestDto, HttpServletResponse res) {
 
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -40,7 +40,8 @@ public class UserService {
         User saveUser = userRepository.save(user);
 
         // Entity -> ResponseDto로 변환 후 반환
-        UserResponseDto userResponseDto = new UserResponseDto(saveUser, "회원가입 성공", 200);
+        // 회원가입 성공 메세지, statusCode 전달
+        UserResponseDto userResponseDto = new UserResponseDto("회원가입 성공", res.getStatus());
 
         return userResponseDto;
     }
@@ -64,6 +65,10 @@ public class UserService {
         String token = jwtUtil.createToken(user.getUsername());
         jwtUtil.addJwtToCookie(token, res);
 
-        return new UserResponseDto(user, "로그인 성공", 200);
+        // Entity -> ResponseDto로 변환 후 반환
+        // 로그인 성공 메세지, statusCode 전달
+        UserResponseDto userResponseDto = new UserResponseDto("로그인 성공", res.getStatus());
+
+        return userResponseDto;
     }
 }

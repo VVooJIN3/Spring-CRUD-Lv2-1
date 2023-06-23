@@ -1,8 +1,6 @@
 package com.crud.blog.entity;
 
-import com.crud.blog.dto.UserRequestDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

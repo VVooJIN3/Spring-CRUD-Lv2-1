@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
+//@Configuration
 public class PasswordConfig {
 
-    @Bean
+    //@Bean
     public PasswordEncoder passwordEncoder() {
         // BCrypt = Hash 함수 종류 중 하나
         return new BCryptPasswordEncoder();

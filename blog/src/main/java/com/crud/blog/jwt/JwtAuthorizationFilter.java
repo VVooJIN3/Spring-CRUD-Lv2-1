@@ -32,11 +32,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String tokenValue = jwtUtil.getTokenFromRequest(request);
+        String tokenValue = jwtUtil.getJwtFromHeader(request);
 
         if (StringUtils.hasText(tokenValue)) {
-            // JWT 토큰 substring
-            tokenValue = jwtUtil.substringToken(tokenValue);
+
             log.info(tokenValue);
 
             if (!jwtUtil.validateToken(tokenValue)) {
@@ -70,7 +69,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     
     // 인증 객체 생성
     private Authentication createAuthentication(String username) {
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }

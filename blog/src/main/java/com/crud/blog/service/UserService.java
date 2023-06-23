@@ -1,6 +1,6 @@
 package com.crud.blog.service;
 
-import com.crud.blog.dto.UserRequestDto;
+import com.crud.blog.dto.SignupRequestDto;
 import com.crud.blog.dto.UserResponseDto;
 import com.crud.blog.entity.User;
 import com.crud.blog.jwt.JwtUtil;
@@ -24,7 +24,7 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
-    public UserResponseDto signup(UserRequestDto requestDto, HttpServletResponse res) {
+    public UserResponseDto signup(SignupRequestDto requestDto, HttpServletResponse res) {
 
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -36,8 +36,7 @@ public class UserService {
         }
 
         // 사용자 DB에 등록
-        User user = new User(username, password);        
-        User saveUser = userRepository.save(user);
+        userRepository.save(new User(username, password));
 
         // Entity -> ResponseDto로 변환 후 반환
         // 회원가입 성공 메세지, statusCode 전달
@@ -46,7 +45,7 @@ public class UserService {
         return userResponseDto;
     }
 
-    public UserResponseDto login(UserRequestDto requestDto, HttpServletResponse res) {
+    public UserResponseDto login(SignupRequestDto requestDto, HttpServletResponse res) {
 
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();

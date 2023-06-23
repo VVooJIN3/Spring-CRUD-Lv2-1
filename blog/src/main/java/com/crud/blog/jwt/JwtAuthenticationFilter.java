@@ -1,6 +1,6 @@
 package com.crud.blog.jwt;
 
-import com.crud.blog.dto.UserRequestDto;
+import com.crud.blog.dto.LoginRequestDto;
 import com.crud.blog.security.UserDetailsImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         log.info("로그인 시도");
         try {
-            UserRequestDto requestDto = new ObjectMapper().readValue(request.getInputStream(), UserRequestDto.class);
+            LoginRequestDto requestDto = new ObjectMapper().readValue(request.getInputStream(), LoginRequestDto.class);
 
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -53,9 +53,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         log.info("로그인 성공 및 JWT 생성");
         String username = ((UserDetailsImpl)authResult.getPrincipal()).getUsername();
+        // role
 
         String token = jwtUtil.createToken(username);
-        jwtUtil.addJwtToCookie(token, response);
+        // jwtUtil.addJwtToCookie(token, response);
+        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
     }
 
     @Override

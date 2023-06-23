@@ -23,7 +23,7 @@ public class PostController {
     private final Map<Integer, Post> blogMap = new HashMap<>();
 
     // 게시글 작성
-    @PostMapping("/post")
+    @PostMapping("/write")
     public PostResponseDto createBlogPost(@RequestBody PostRequestDto requestDto) {
 
         return postService.createBlogPost(requestDto);
@@ -37,21 +37,21 @@ public class PostController {
     }
 
     // 선택한 게시글 조회
-    @GetMapping("/post/{id}")
+    @GetMapping("/posts/{id}")
     public PostResponseDto getBlogPost(@PathVariable Integer id) {
 
         return postService.getBlogPost(id);
     }
 
     // 선택한 게시글 수정
-    @PutMapping("/post/{id}")
+    @PutMapping("/posts/{id}")
     public PostResponseDto updateBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto) {
 
         return postService.updateBlogPost(id, requestDto);
     }
 
     // 선택한 게시글 삭제
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/posts/{id}")
     public PostResponseDto deleteBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto) {
 
         return postService.deleteBlogPost(id, requestDto);

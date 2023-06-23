@@ -67,7 +67,7 @@ public class WebSecurityConfig {
                 authorizeHttpRequests
                         // resources 접근 허용 설정
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        // "/blog/"로 시작하는 요청 모두 접근 허가
+                        // "/blog/auth/"로 시작하는 요청 모두 접근 허가
                         .requestMatchers("/blog/**").permitAll()
                         // 그 외 모든 요청 인증 처리
                         .anyRequest().authenticated()

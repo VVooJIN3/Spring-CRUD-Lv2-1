@@ -3,6 +3,7 @@ package com.crud.blog.service;
 import com.crud.blog.dto.PostRequestDto;
 import com.crud.blog.dto.PostResponseDto;
 import com.crud.blog.entity.Post;
+import com.crud.blog.entity.User;
 import com.crud.blog.repository.PostRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -18,26 +19,20 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public PostResponseDto createBlogPost(PostRequestDto requestDto) {
 
-        // RequestDto -> Entity
-        Post post = new Post(requestDto);
-
-        // DB 저장
-        Post savePost = postRepository.save(post); // 정보 저장
-
-        // Entity -> ResponseDto로 변환 후 반환
-        PostResponseDto postResponseDto = new PostResponseDto(savePost);
-
-        return postResponseDto;
+    // 게시글 생성
+    public PostResponseDto createBlogPost(PostRequestDto requestDto, User user) {
+        Post post = postRepository.save(new Post(requestDto, user));
+        return new PostResponseDto(post);
     }
 
-
+    // 전체 게시글 조회
     public List<PostResponseDto> getBlogPosts() {
-
         // DB 조회
         return postRepository.findAllByOrderByCreatedAtDesc().stream().map(PostResponseDto::new).toList();
     }
+
+    // 선택한 게시글 조회
     public PostResponseDto getBlogPost(Integer id) {
 
         // 해당 게시글이 DB에 존재하는지 확인
@@ -48,6 +43,7 @@ public class PostService {
     }
 
 
+    // 선택한 게시글 수정
     @Transactional
     public PostResponseDto updateBlogPost(Integer id, PostRequestDto requestDto) {
 

@@ -2,8 +2,10 @@ package com.crud.blog.dto;
 
 import com.crud.blog.entity.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class UserResponseDto {
 
     //private String username;

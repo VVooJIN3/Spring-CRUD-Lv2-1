@@ -2,10 +2,12 @@ package com.crud.blog.dto;
 
 import com.crud.blog.entity.Post;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
 public class PostResponseDto {
         
     private LocalDateTime createdAt; // 생성시간
@@ -23,8 +25,8 @@ public class PostResponseDto {
 
     public PostResponseDto(Post post) {
 
-        this.createdAt = post.getCreatedAt();
-        this.modifiedAt = post.getModifiedAt();
+        // this.createdAt = post.getCreatedAt();
+        // this.modifiedAt = post.getModifiedAt();
 
         this.id = post.getId();
         this.title = post.getTitle();

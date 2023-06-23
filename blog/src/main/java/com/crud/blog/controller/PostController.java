@@ -3,7 +3,9 @@ package com.crud.blog.controller;
 import com.crud.blog.dto.PostRequestDto;
 import com.crud.blog.dto.PostResponseDto;
 import com.crud.blog.entity.Post;
+import com.crud.blog.security.UserDetailsImpl;
 import com.crud.blog.service.PostService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -24,9 +26,9 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping("/write")
-    public PostResponseDto createBlogPost(@RequestBody PostRequestDto requestDto) {
+    public PostResponseDto createBlogPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return postService.createBlogPost(requestDto);
+        return postService.createBlogPost(requestDto, userDetails.getUser());
     }
 
     // 전체 게시글 목록 조회

@@ -51,15 +51,15 @@ public class PostController {
 
     // 선택한 게시글 수정
     @PutMapping("/posts/{id}")
-    public PostResponseDto updateBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto) {
+    public PostResponseDto updateBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return postService.updateBlogPost(id, requestDto);
+        return postService.updateBlogPost(id, requestDto, userDetails);
     }
 
     // 선택한 게시글 삭제
     @DeleteMapping("/posts/{id}")
-    public PostResponseDto deleteBlogPost(@PathVariable Integer id, @RequestBody PostRequestDto requestDto) {
+    public PostResponseDto deleteBlogPost(@PathVariable Integer id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return postService.deleteBlogPost(id, requestDto);
+        return postService.deleteBlogPost(id, userDetails);
     }
 }

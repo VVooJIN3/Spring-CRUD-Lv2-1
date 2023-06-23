@@ -5,8 +5,9 @@ import com.crud.blog.dto.PostResponseDto;
 import com.crud.blog.entity.Post;
 import com.crud.blog.entity.User;
 import com.crud.blog.repository.PostRepository;
-import jakarta.transaction.Transactional;
+import com.crud.blog.security.UserDetailsImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,28 +54,24 @@ public class PostService {
 
     // 선택한 게시글 수정
     @Transactional
-    public PostResponseDto updateBlogPost(Integer id, PostRequestDto requestDto) {
+    public PostResponseDto updateBlogPost(Integer id, PostRequestDto requestDto, UserDetailsImpl userDetails) {
 
         // 1. 해당 게시글이 DB에 존재하는지 확인
         Post post = findBlogPost(id);
-
-        // 2. 비밀번호 체크
-        // post.checkPassword(requestDto.getPassword());
+        // 2. 작성자(username) 체크
+        post.checkUsername(userDetails.getUsername());
 
         // 3. 존재하면 post 수정
         post.update(requestDto); // DB 저장
-        PostResponseDto postResponseDto = new PostResponseDto(post);
-
-        return postResponseDto;
+        return new PostResponseDto(post);
     }
 
-    public PostResponseDto deleteBlogPost(Integer id, PostRequestDto requestDto) {
+    public PostResponseDto deleteBlogPost(Integer id, UserDetailsImpl userDetails) {
 
         // 1. 해당 게시글이 DB에 존재하는지 확인
         Post post = findBlogPost(id);
-
-        // 2. 비밀번호 체크
-        // post.checkPassword(requestDto.getPassword());
+        // 2. 작성자(username) 체크
+        post.checkUsername(userDetails.getUsername());
 
         // 3. 존재하면 post 삭제
         postRepository.delete(post);
